@@ -5,10 +5,13 @@ from django.http import HttpResponseRedirect, HttpResponse
 import cas
 
 from . import settings
+from .models import TUIDUser
+from .util import update_user
 
 
 def _get_service_url():
     return "https://localhost:8443/tuid/login/"
+
 
 def login(request, next_page=None):
     """
@@ -35,6 +38,11 @@ def login(request, next_page=None):
     if user:
         request.session['TUID_uid'] = user
         request.session['TUID_attrs'] = attr
+
+        if settings.TUID_CREATE_USER:
+            tuid_user , created = TUIDUser.objects.get_or_create(uid = user)
+            update_user(tuid_user, user, attr)
+            tuid_user.save()
 
         if not next_page:
             next_page = settings.TUID_DEFAULT_NEXT
