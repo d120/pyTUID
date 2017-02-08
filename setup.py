@@ -10,10 +10,10 @@ setup(
     version='0.1',
     packages=find_packages(),
     include_package_data=True,
-    license='AGPL-3.0',  # example license
+    license='MIT',
     description='Django app for authentication via TUID (CAS)',
-    #long_description=README,
-    #url='https://www.example.com/',
+    long_description='README.md',
+    url='https://github.com/d120/pyTUID',
     author='Fabian Franke',
     author_email='ffranke@d120.de',
     install_requires=[
