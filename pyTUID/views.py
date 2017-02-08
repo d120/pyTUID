@@ -13,7 +13,7 @@ def _get_service_url(request):
     return 'https://' + request.get_host() + request.get_full_path()
 
 
-def login(request, next_page=None):
+def login(request):
     """
     Either logs a user in by verifying it's ticket, if no ticket is present the
     user is redirected to the CAS login.
@@ -44,9 +44,8 @@ def login(request, next_page=None):
             update_user(tuid_user, user, attr)
             tuid_user.save()
 
-        if not next_page:
-            next_page = settings.TUID_LOGIN_DEFAULT_NEXT
-
+        next_page = request.POST.get('next', request.GET.get('next',
+            settings.TUID_LOGIN_DEFAULT_NEXT))
         return HttpResponseRedirect(next_page)
 
     else:
@@ -57,7 +56,6 @@ def logout(request, next_page=None):
     request.session['TUID_uid'] = None
     request.session['TUID_attrs'] = None
 
-    if not next_page:
-        next_page = settings.TUID_LOGOUT_DEFAULT_NEXT
-
+    next_page = request.POST.get('next', request.GET.get('next',
+        settings.TUID_LOGOUT_DEFAULT_NEXT))
     return HttpResponseRedirect(next_page)
