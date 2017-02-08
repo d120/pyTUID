@@ -9,8 +9,8 @@ from .models import TUIDUser
 from .util import update_user
 
 
-def _get_service_url():
-    return "https://localhost:8443/tuid/login/"
+def _get_service_url(request):
+    return 'https://' + request.get_host() + request.get_full_path()
 
 
 def login(request, next_page=None):
@@ -22,7 +22,7 @@ def login(request, next_page=None):
     casClient = cas.CASClient(
             version = 'CAS_2_SAML_1_0',
 
-            service_url = _get_service_url(),
+            service_url = _get_service_url(request),
             server_url  = settings.TUID_SERVER_URL,
     )
 
