@@ -45,10 +45,19 @@ def login(request, next_page=None):
             tuid_user.save()
 
         if not next_page:
-            next_page = settings.TUID_DEFAULT_NEXT
+            next_page = settings.TUID_LOGIN_DEFAULT_NEXT
 
         return HttpResponseRedirect(next_page)
 
     else:
         raise PermissionDenied('Login failed.')
 
+
+def logout(request, next_page=None):
+    request.session['TUID_uid'] = None
+    request.session['TUID_attrs'] = None
+
+    if not next_page:
+        next_page = settings.TUID_LOGOUT_DEFAULT_NEXT
+
+    return HttpResponseRedirect(next_page)
