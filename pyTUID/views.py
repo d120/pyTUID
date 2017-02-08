@@ -52,8 +52,7 @@ def login(request):
 
 
 def logout(request, next_page=None):
-    request.session['TUID_uid'] = None
-    request.session['TUID_attrs'] = None
+    del request.session['TUID']
 
     next_page = request.POST.get('next', request.GET.get('next',
         settings.TUID_LOGOUT_DEFAULT_NEXT))
