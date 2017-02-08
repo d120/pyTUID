@@ -36,8 +36,7 @@ def login(request):
 
     #Ticket seems to be valid save user and attributes in session
     if user:
-        request.session['TUID_uid'] = user
-        request.session['TUID_attrs'] = attr
+        request.session['TUID'] = (user, attr)
 
         if settings.TUID_CREATE_USER:
             tuid_user , created = TUIDUser.objects.get_or_create(uid = user)
