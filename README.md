@@ -19,8 +19,9 @@ Currently the following settings are available:
 * `TUID_LOGOUT_DEFAULT_NEXT` sets the default page after logout when no `next` is present in `POST` or `GET` parameters (default: `"/"`)
 * `TUID_MAPPING` sets the mapping from SAML attributes to model fields (key is model field, value is SAML attribute) 
   The default is:
+
   ```python
-  {'surname'    : 'surname',
+  {'surname'   : 'surname',
    'given_name' : 'givenName',
    'email'      : 'mail',
    'groups'     : 'groupMembership'}
