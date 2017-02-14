@@ -29,5 +29,28 @@ Currently the following settings are available:
   Every key not provided in your config will be set to default.
   
 ## Usage
-The easiest way to use this app is by using the [`@tuid_login_required`](https://github.com/d120/pyTUID/blob/3437bb3efefb9e9036f5400a298e21bc2051061c/pyTUID/decorators.py#L9) decorator on your view functions. This will check whether the user is logged in (via this app) or will otherwise redirect to the login page.
-Currently the only other possibillity for interaction is using the [`TUIDUser`](https://github.com/d120/pyTUID/blob/3437bb3efefb9e9036f5400a298e21bc2051061c/pyTUID/models.py#L4) object, added to the request with the middleware.    
+There are three differnt ways to use this app:
+
+### Decorators
+For function based views the easiest interaction with this app is using the view function decorators:
+
+#### tuid_login_required
+The [`@tuid_login_required`](https://github.com/d120/pyTUID/blob/240d5c6/pyTUID/decorators.py#L35) decorator checks whether the user is logged in (with TUID) and redirects it to the login page otherwise.
+
+#### tuid_user_in_group
+The [`@tuid_user_in_group(group[, permission_denied_message])`](https://github.com/d120/pyTUID/blob/240d5c6/pyTUID/decorators.py#L49) decorator first checks whether the user is logged in (with TUID) and displays the login page otherwise. If the user is already logged in it is checked whether it is in the given `group` and a `PermissionDenied` is risen with the optional `permission_denied_message`.
+
+#### tuid_user_passes_test
+The [`@tuid_user_passes_test(test_func[, raise_exception[, permission_denied_message]])`](https://github.com/d120/pyTUID/blob/240d5c6/pyTUID/decorators.py#L10) decorator applies the `test_func` on the `TUIDUser` object. If `True` is returned the view will be displayed as usual. If `False` is returned and `raise_exception` is `True` a `PermissionDenied`exception with the optional `permission_denied_message` will be risen. If `raisle_exceptio` is `False` (the default) the login page will be displayed.
+
+### Mixins
+For class based views the following two mixins exists:
+
+#### TUIDLoginRequiredMixin
+The [`TUIDLoginRequiredMixin`](https://github.com/d120/pyTUID/blob/240d5c6/pyTUID/mixins.py#L6) works exactly like the `tuid_login_required` decorator.
+
+#### TUIDUserInGroupMixin
+The [`TUIDUserInGroupMixin`](https://github.com/d120/pyTUID/blob/240d5c6/pyTUID/mixins.py#L20) works like the `tuid_user_in_group` decorator except that the parameters have to be specified as fields of the view class. The `group_required` field acts like the group parameter of the decorator and the `permission_denied_message` (optional) acts also like the `permission_denied_message`of the decorator.
+
+### TUIDUser
+For more specific use-cases you may use the `TUIDUser` object of the `request`, which is an instance of [`models.TUIDUSER`](https://github.com/d120/pyTUID/blob/240d5c6/pyTUID/models.py#L4).
