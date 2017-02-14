@@ -9,7 +9,7 @@ from django.core.exceptions import PermissionDenied
 
 def tuid_user_passes_test(test_func, 
                           raise_exception=False,
-                          permission_denied_message=''):
+                          permission_denied_message=None):
     """
     Decorator that checks wether a user passes the given test, otherwise
     displays the login page or raises a PermissionDenied exception with the
@@ -21,7 +21,9 @@ def tuid_user_passes_test(test_func,
             if test_func(request.TUIDUser):
                 return view_func(request, *args, **kwargs)
             if raise_exception:
-                raise PermissionDenied(permission_denied_message)
+                if permission_denied_message:
+                    raise PermissionDenied(permission_denied_message)
+                raise PermissionDenied
             login_url = reverse('tuid-login')
             current_url = request.get_full_path()
             return HttpResponseRedirect(login_url + '?next=' +
@@ -44,7 +46,7 @@ def tuid_login_required(func=None):
     return actual_decorator
 
 
-def tuid_user_in_group(group, permission_denied_message):
+def tuid_user_in_group(group, permission_denied_message=None):
     """
     Decorator that checks whether the user is loggedd in and belongs to the
     specified group.
@@ -57,7 +59,9 @@ def tuid_user_in_group(group, permission_denied_message):
         if user:
             if user.in_group(group):
                 return True
-            raise PermissionDenied(permission_denied_message)
+            if permission_denied_message:
+                raise PermissionDenied(permission_denied_message)
+            raise PermissionDenied
         #Otherwise show login page:
         return False
 
