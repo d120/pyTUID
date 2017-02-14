@@ -17,9 +17,9 @@ class TUIDUser(models.Model):
         """Returns all the groups as list of strings"""
         return str(self.groups).split(';')
 
-    def is_in_group(self, group_string):
+    def in_group(self, group_string):
         """Checks wether this user is in the specified group"""
-        return group_string in self.groups_list()
+        return group_string in self.group_list()
 
     def name(self):
         """Returns the users full name"""
