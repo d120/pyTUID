@@ -1,5 +1,8 @@
 # pyTUID
-Allows authentication with TUID.
+pyTUID is a simple CAS client django app which, contrary to other apps like this, don't use the `django.contrib.auth` models nor middleware. So all data is saved to a own database table (or not att all).
+pyTUID is fitted for our use case with the CAS of the TU Darmstadt (hence the name) but can probably be used with many other CAS servers with a similar configuration (CAS 2 with SAML 1).
+
+Feel free to adapt this app to your needs. If you make changes compatible to the current behavior (or if it is configurable) I would be glad if you made a pull request.
 
 ## Setup
 * To set up install this python library (for example with pip).
