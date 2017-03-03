@@ -1,8 +1,10 @@
+from django.utils.deprecation import MiddlewareMixin
+
 from .models import TUIDUser
 from .util import update_user
 from . import settings
 
-class TUIDMiddleware(object):
+class TUIDMiddleware(MiddlewareMixin, object):
 
     def process_request(self, request):
 
