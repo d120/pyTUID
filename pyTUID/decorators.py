@@ -24,7 +24,7 @@ def tuid_user_passes_test(test_func,
                 if permission_denied_message:
                     raise PermissionDenied(permission_denied_message)
                 raise PermissionDenied
-            login_url = reverse('tuid-login')
+            login_url = reverse('pyTUID:login')
             current_url = request.get_full_path()
             return HttpResponseRedirect(login_url + '?next=' +
                     urlquote_plus(current_url))

@@ -52,8 +52,19 @@ def login(request):
 
 
 def logout(request, next_page=None):
-    del request.session['TUID']
+    # Flush the session (clear it completely)
+    request.session.flush()
 
     next_page = request.POST.get('next', request.GET.get('next',
-        settings.TUID_LOGOUT_DEFAULT_NEXT))
+            settings.TUID_LOGOUT_DEFAULT_NEXT))
+
+    if request.GET.get('cas_logout'):
+        casClient = cas.CASClient(
+            version = 'CAS_2_SAML_1_0',
+
+            #service_url = _get_service_url(request),
+            server_url  = settings.TUID_SERVER_URL,
+        )
+        next_page = casClient.get_logout_url(redirect_url="https://" + request.get_host() + next_page)
+
     return HttpResponseRedirect(next_page)

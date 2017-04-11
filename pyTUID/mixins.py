@@ -12,7 +12,7 @@ class TUIDLoginRequiredMixin(object):
     def dispatch(self, request, *args, **kwargs):
         if request.TUIDUser:
             return super().dispatch(request, *args, **kwargs)
-        login_url = reverse('tuid-login')
+        login_url = reverse('pyTUID:login')
         current_url = request.get_full_path()
         return HttpResponseRedirect(login_url + '?next=' + urlquote_plus(current_url))
 
@@ -39,7 +39,6 @@ class TUIDUserInGroupMixin(object):
             if self.permission_denied_message:
                 raise PermissionDenied(self.permission_denied_message)
             raise PermissionDenied()
-        login_url = reverse('tuid-login')
+        login_url = reverse('pyTUID:login')
         current_url = request.get_full_path()
         return HttpResponseRedirect(login_url + '?next=' + urlquote_plus(current_url))
-
