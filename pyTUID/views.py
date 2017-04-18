@@ -10,6 +10,8 @@ from .util import update_user
 
 
 def _get_service_url(request):
+    if settings.TUID_FORCE_SERVICE_URL:
+        return settings.TUID_FORCE_SERVICE_URL
     return 'https://' + request.get_host() + request.get_full_path()
 
 

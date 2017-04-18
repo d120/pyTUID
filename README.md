@@ -30,6 +30,8 @@ Currently the following settings are available:
    'groups'     : 'groupMembership'}
   ```
   Every key not provided in your config will be set to default.
+* `TUID_FORCE_SERVICE_URL` sets the service url provided to CAS. If not set the
+  request url is used as service url.
   
 ## Usage
 There are three differnt ways to use this app:
