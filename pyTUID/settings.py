@@ -15,3 +15,5 @@ TUID_MAPPING        = getattr(settings, 'TUID_MAPPING', {})
 for key in __tuid_mapping_default:
     if key not in TUID_MAPPING:
         TUID_MAPPING[key] =__tuid_mapping_default[key]
+
+TUID_FORCE_SERVICE_URL         = getattr(settings, 'TUID_FORCE_SERVICE_URL', None)
