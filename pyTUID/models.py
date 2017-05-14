@@ -11,7 +11,7 @@ class TUIDUser(models.Model):
     surname = models.CharField(max_length=50, verbose_name=_('surname'))
     given_name = models.CharField(max_length=50, verbose_name=_('given name'))
     email = models.EmailField(verbose_name=_('email'))
-    groups = models.CharField(max_length=256, verbose_name=_('cas groups'))
+    groups = models.TextField(verbose_name=_('cas groups'))
 
     def group_list(self):
         """Returns all the groups as list of strings"""
