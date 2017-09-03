@@ -10,7 +10,7 @@ class TUIDUser(models.Model):
     uid = models.CharField(max_length=50, unique=True, verbose_name=_('TUID'))
     surname = models.CharField(max_length=50, verbose_name=_('surname'))
     given_name = models.CharField(max_length=50, verbose_name=_('given name'))
-    email = models.EmailField(verbose_name=_('email'))
+    email = models.EmailField(blank=True, null=True, verbose_name=_('email'))
     groups = models.TextField(verbose_name=_('cas groups'))
 
     def group_list(self):
@@ -28,4 +28,3 @@ class TUIDUser(models.Model):
 
     def __str__(self):
         return self.name() + ' (' + self.uid + ')'
-
