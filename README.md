@@ -20,7 +20,7 @@ Currently the following settings are available:
 * `TUID_CREATE_USER` sets whether the logged in users should be saved to the database (default: `True`)
 * `TUID_LOGIN_DEFAULT_NEXT` sets the default page after login when no `next` is present in `POST` or `GET` parameters (default: `"/"`)
 * `TUID_LOGOUT_DEFAULT_NEXT` sets the default page after logout when no `next` is present in `POST` or `GET` parameters (default: `"/"`)
-* `TUID_MAPPING` sets the mapping from SAML attributes to model fields (key is model field, value is SAML attribute) 
+* `TUID_MAPPING` sets the mapping from SAML attributes to model fields (key is model field, value is SAML attribute)
   The default is:
 
   ```python
@@ -32,9 +32,9 @@ Currently the following settings are available:
   Every key not provided in your config will be set to default.
 * `TUID_FORCE_SERVICE_URL` sets the service url provided to CAS. If not set the
   request url is used as service url.
-  
+
 ## Usage
-There are three differnt ways to use this app:
+There are three different ways to use this app:
 
 ### Decorators
 For function based views the easiest interaction with this app is using the view function decorators:
