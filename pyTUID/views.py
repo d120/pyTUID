@@ -36,7 +36,18 @@ def login(request):
         return HttpResponseRedirect(casClient.get_login_url())
     
     #Ticket is present verify it.
-    user, attr, _ = casClient.verify_ticket(ticket)
+    try:
+        user, attr, _ = casClient.verify_ticket(ticket)
+    #this happens if the response from the hrz server is empty
+    #a simple solution is to reauthenticate the user
+    except ParseError:
+        request.session.flush()
+        casClient = cas.CASClient(
+            version = 'CAS_2_SAML_1_0',
+            server_url  = settings.TUID_SERVER_URL,
+        )
+        next_page = casClient.get_logout_url(redirect_url=casClient.get_login_url())
+        return HttpResponseRedirect(next_page)
 
     #Ticket seems to be valid save user and attributes in session
     if user:
