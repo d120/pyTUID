@@ -10,7 +10,7 @@ class TUIDMiddleware(MiddlewareMixin, object):
 
         if 'TUID' in request.session.keys():
             if settings.TUID_CREATE_USER:
-                request.TUIDUser = TUIDUser.objects.get(uid=request.session['TUID'][0])
+                request.TUIDUser = TUIDUser.objects.filter(uid=request.session['TUID'][0]).first()
             else:
                 tuid_user = TUIDUser()
                 update_user(tuid_user, *request.session['TUID'])
