@@ -8,7 +8,7 @@ class TUIDMiddleware(MiddlewareMixin, object):
 
     def process_request(self, request):
 
-        if 'TUID' in request.session:
+        if 'TUID' in request.session.keys():
             if settings.TUID_CREATE_USER:
                 request.TUIDUser = TUIDUser.objects.get(uid=request.session['TUID'][0])
             else:
