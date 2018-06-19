@@ -1,5 +1,7 @@
+import ast
 from django.db import models
 from django.utils.translation import ugettext as _
+
 
 class TUIDUser(models.Model):
     """Represents a TUID user with various properties returned from CAS"""
@@ -15,7 +17,7 @@ class TUIDUser(models.Model):
 
     def group_list(self):
         """Returns all the groups as list of strings"""
-        return str(self.groups).split(';')
+        return ast.literal_eval(self.groups) if self.groups[0] == '[' and self.groups[-1] == ']' else [self.groups]
 
     def in_group(self, group_string):
         """Checks wether this user is in the specified group"""

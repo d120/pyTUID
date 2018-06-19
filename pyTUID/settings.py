@@ -8,7 +8,7 @@ TUID_LOGOUT_DEFAULT_NEXT= getattr(settings, 'TUID_LOGOUT_DEFAULT_NEXT', '/')
 __tuid_mapping_default = {  'surname'       : 'surname',
                             'given_name'    : 'givenName',
                             'email'         : 'mail',
-                            'groups'        : 'groupMembership'}
+                            'groups'        : 'groupMembership' }
 
 TUID_MAPPING        = getattr(settings, 'TUID_MAPPING', {})
 
