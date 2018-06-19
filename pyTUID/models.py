@@ -17,7 +17,10 @@ class TUIDUser(models.Model):
 
     def group_list(self):
         """Returns all the groups as list of strings"""
-        return ast.literal_eval(self.groups) if self.groups[0] == '[' and self.groups[-1] == ']' else [self.groups]
+        if self.groups and len(self.groups) > 0:
+            return ast.literal_eval(self.groups) if self.groups[0] == '[' and self.groups[-1] == ']' else [self.groups]
+        else:
+            return []
 
     def in_group(self, group_string):
         """Checks wether this user is in the specified group"""
