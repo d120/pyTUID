@@ -5,6 +5,9 @@ from setuptools import find_packages, setup
 # allow setup.py to be run from any path
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
+with open("README.md", "r") as fh:
+    long_description = fh.read()
+
 setup(
     name='pyTUID',
     version='1.3.3',
@@ -12,7 +15,7 @@ setup(
     include_package_data=True,
     license='MIT',
     description='Django app for authentication via TUID (CAS)',
-    long_description='README.md',
+    long_description=long_description,
     url='https://github.com/d120/pyTUID',
     author='Fabian Franke',
     author_email='ffranke@d120.de',
