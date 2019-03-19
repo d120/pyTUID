@@ -1,0 +1,22 @@
+language: python
+python: "3.6"
+
+script: python setup.py bdist_wheel
+
+deploy:
+  - provider: releases
+    file_glob: true
+    file: dist/*.whl
+    skip_cleanup: true
+    on:
+      tags: true
+    api_key:
+      secure: ""
+  - provider: pypi
+    user: d120
+    distributions: "sdist bdist_wheel"
+    skip_cleanup: true
+    on:
+      tags: true
+    password:
+      secure: "gdft0dfXk+UORzJXFLZKXPArjySmz4CJUKx++6mn1dPkNEL86gWEXFumPOouAgecVjdKe36D95ZfOyHeYZkvaa9emRY2xyNR+R5AID7YgOQ5PijtCvlckO1vQGU3+OYnGUKB3JHLGvqfpjXVbSftkhPlRX0mUmbo/HHn+Z8mtXq+hzdj0nD6ElcF0XwU6h0JsJ9+3OUrmrJGWR+06pCIAiXHgFgx7qyNPDODIxVAQAyMasRmWlKLmXCYWooLQ+g5SALSKX/ODkRS3yfYfKrztH0V2hIWdQjwwMqWCklCWYkL0bCCxyCsGKG+JDCgT4NeiKSDYD3ULk42N96j2RQmm5VJqjSSEVUcvw7WMqxt2QURnXHwnGsIayBqOvkRwQtOc+e8xFUCOe0x4JieZ2stmoMjJ9AN6fdLxkruhrg2+1K2pncEbkZoBbJr8IJ2l2erM19OF9/5nULjRI69HExWjL+Tb9/9n0fCk0Vr/lo06YPcEZ/NSCnMcnmq2Lu0aTBQ5adfkFIq9SoLDFgjdBr3hn0V5cDlS/v/c1RrHmgoK3IRwm3jB2deCLYvyEy3QU1ghV40CsLHVlOpTJfnHNEFD6RggI3oGnOA1J3AaLhCK4iCf+Xde1KFDduP7g6kAkqiV4FRyFT08qhVj5Ws4i5Ehz2nNS9PhIT6zsTxdlJRzHc="
