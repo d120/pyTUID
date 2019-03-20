@@ -4,14 +4,6 @@ python: "3.6"
 script: python setup.py bdist_wheel
 
 deploy:
-  - provider: releases
-    file_glob: true
-    file: dist/*.whl
-    skip_cleanup: true
-    on:
-      tags: true
-    api_key:
-      secure: ""
   - provider: pypi
     user: d120
     distributions: "sdist bdist_wheel"
