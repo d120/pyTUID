@@ -16,7 +16,7 @@ setup(
     license='MIT',
     description='Django app for authentication via TUID (CAS)',
     long_description=long_description,
-    long_description_content_type="text/markdown",
+    long_description_content_type='text/markdown',
     url='https://github.com/d120/pyTUID',
     author='Fabian Franke',
     author_email='ffranke@d120.de',
