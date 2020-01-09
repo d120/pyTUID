@@ -10,7 +10,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name='pyTUID',
-    version='1.3.4',
+    version='1.3.5',
     packages=find_packages(),
     include_package_data=True,
     license='MIT',
